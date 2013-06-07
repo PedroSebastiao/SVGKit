@@ -149,6 +149,12 @@
 		NSString* actualOpacity = [stylableElement cascadedValueForStylableProperty:@"opacity"];
 		layer.opacity = actualOpacity.length > 0 ? [actualOpacity floatValue] : 1.0f; // svg's "opacity" defaults to 1!
 	}
+    
+    if ([[nonStylableElement getAttribute:@"display"] length] > 0) {
+        if ([[nonStylableElement getAttribute:@"display"] isEqualToString:@"none"]) {
+            layer.hidden = YES;
+        }
+    }
 }
 
 +(CALayer *) newCALayerForPathBasedSVGElement:(SVGElement<SVGTransformable>*) svgElement withPath:(CGPathRef) pathRelative
